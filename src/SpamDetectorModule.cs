@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Piranha.Extend;
+using Piranha.Manager;
 
 namespace Zon3.SpamDetector
 {
@@ -46,6 +47,16 @@ namespace Zon3.SpamDetector
         /// </summary>
         public void Init()
         {
+            // We prefer to reside under Settings, at the bottom
+            var settingsIndex = Menu.Items.FindLastIndex(menuItem => menuItem.Name.Equals("Settings", StringComparison.OrdinalIgnoreCase));
+
+            Menu.Items[settingsIndex].Items.Add(new MenuItem
+            {
+                InternalId = "SpamDetector",
+                Name = "Spam Detector",
+                Route = "~/manager/spamdetector",
+                Css = "fas fa-comment-slash",
+            });
         }
     }
 }
